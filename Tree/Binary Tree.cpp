@@ -8,21 +8,17 @@ struct Node {
 
     Node(int val) : data(val), left(nullptr), right(nullptr) {}
 
-    Node* search(int val) {
-        if (this == nullptr) return nullptr;
-        if (this->data == val) return this;
+    void buildTree(int par, int child, char dir) {
+        if (this == nullptr) return;
 
-        Node* leftSearch = this->left ? this->left->search(val) : nullptr;
-        if (leftSearch) return leftSearch;
+        if (this->data == par) {
+            if (dir == 'L') this->left = new Node(child);
+            else this->right = new Node(child);
+            return;
+        }
 
-        return this->right ? this->right->search(val) : nullptr;
-    }
-
-    void insert(int root, int child, char dir) {
-        Node* par = this->search(root);
-        if (!par) return;
-
-        dir == 'L' ? (!par->left and (par->left = new Node(child))) : (!par->right and (par->right = new Node(child)));
+        if (this->left) this->left->buildTree(par, child, dir);
+        if (this->right) this->right->buildTree(par, child, dir);
     }
 
     bool compareTo(Node* other) {
@@ -34,6 +30,56 @@ struct Node {
 
         return (this->left ? this->left->compareTo(other->left) : other->left == nullptr) and
                (this->right ? this->right->compareTo(other->right) : other->right == nullptr);
+    }
+
+    bool isLeaf() {
+        return !this->left && !this->right;
+    }
+    
+    int64_t sumRightLeaves() {
+        if (!this) return 0;
+
+        int64_t sum = 0;
+        if (this->right) {
+            if (this->right->isLeaf()) sum += this->right->data;
+            else sum += this->right->sumRightLeaves();
+        }
+        if (this->left) sum += this->left->sumRightLeaves();
+
+        return sum;
+    }
+
+    int64_t sumLeftLeaves() {
+        if (!this) return 0;
+
+        int64_t sum = 0;
+        if (this->left) {
+            if (this->left->isLeaf()) sum += this->left->data;
+            else sum += this->left->sumLeftLeaves();
+        }
+        if (this->right) sum += this->right->sumLeftLeaves();
+
+        return sum;
+    }
+
+    int64_t sumLeafToLeafUtil(int64_t &MAX) {
+        if (!this) return 0;
+
+        int64_t L = this->left ? this->left->sumLeafToLeafUtil(MAX) : 0;
+        int64_t R = this->right ? this->right->sumLeafToLeafUtil(MAX) : 0;
+
+        if (!this->left && !this->right) return this->data;
+        if (!left) return R + this->data;
+        if (!right) return L + this->data;
+
+        MAX = max(MAX, L + R + this->data);
+        return max(L, R) + this->data;
+    }
+
+    int64_t sumLeafToLeaf() {
+        int64_t MAX = LLONG_MIN;
+        int64_t result = sumLeafToLeafUtil(MAX);
+        return (MAX == LLONG_MIN) ? result : MAX;
     }
 
     void deleteTree() {
@@ -50,8 +96,8 @@ struct Node {
     void NLR() {
         if (this == nullptr) return;  
         cout << this->data;
-        if (this->left) this->left->LNR();
-        if (this->right) this->right->LNR();
+        if (this->left) this->left->NLR();
+        if (this->right) this->right->NLR();
     }
     
     void LNR() {
@@ -63,8 +109,8 @@ struct Node {
     
     void LRN() {
         if (this == nullptr) return;  
-        if (this->left) this->left->LNR();
-        if (this->right) this->right->LNR();
+        if (this->left) this->left->LRN();
+        if (this->right) this->right->LRN();
         cout << this->data;
     }
 };
