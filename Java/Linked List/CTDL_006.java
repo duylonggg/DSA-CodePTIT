@@ -1,6 +1,7 @@
-import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class CTDL_006 {
     public static void main(String[] args) {
@@ -12,20 +13,11 @@ public class CTDL_006 {
             linkedList.add(input.nextInt());
         }
 
-        for (int i = 0; i < linkedList.size() - 1; ++i) {
-            int current = linkedList.get(i);
-            int j = i + 1;
-            while (j < linkedList.size()) {
-                int temp = linkedList.get(j);
-                if (temp == current) {
-                    linkedList.remove(j);
-                } else {
-                    ++j;    
-                }
-            }
-        }
+        LinkedList<Integer> distinctList = linkedList.stream()
+                                             .distinct()
+                                             .collect(Collectors.toCollection(LinkedList::new));
 
-        for (int num : linkedList) {
+        for (int num : distinctList) {
             System.out.print(num + " ");
         }
         System.out.println();
