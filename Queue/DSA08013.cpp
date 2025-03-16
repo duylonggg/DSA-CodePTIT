@@ -11,7 +11,7 @@ int dx[] = {1, -1, 0, 0};
 int dy[] = {0, 0, 1, -1};
 
 int BFS() {
-    queue<tuple<int, int, int>> q;  
+    queue<array<int, 3>> q;  
     q.push({x, y, 0}); 
     matrix[x][y] = 'X';
 

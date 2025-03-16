@@ -9,17 +9,17 @@ int main() {
     fastio()
     tests() {
         int n;
-        long long lim = 0;
+        int64_t lim = 0;
         cin >> n;
 
         for (int i = 1; i <= n; ++i) lim = lim * 10 + 8;
 
-        queue<long long> q;
-        stack<long long> stk;
+        queue<int64_t> q;
+        stack<int64_t> stk;
         q.push(6);
         q.push(8);
         while (q.front() != lim) {
-            long long num = q.front();
+            int64_t num = q.front();
             q.pop();
 
             stk.push(num);

@@ -9,7 +9,7 @@ vector<int> result;
 void gen() {
     queue<int> q;
 
-    for (int i = 1; i <= 5; i++) q.push(i);
+    for (int i = 1; i <= 5; ++i) q.push(i);
 
     while (!q.empty()) {
         int num = q.front();

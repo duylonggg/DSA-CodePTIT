@@ -21,7 +21,7 @@ bool is_prime(int n) {
 int BFS() {
     int vis[10000] = {};
     vis[S] = 1;
-    queue<pair<int, int>> q;
+    queue<array<int, 2>> q;
     q.push({S, 0});
 
     while (!q.empty()) {

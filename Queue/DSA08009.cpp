@@ -10,7 +10,7 @@ int S, T;
 int BFS() {
     int vis[10001] = {};
     vis[S] = 1;
-    queue<pair<int, int>> q;
+    queue<array<int, 2>> q;
     q.push({S, 0});
 
     while (!q.empty()) {

@@ -7,7 +7,7 @@ using namespace std;
 
 int BFS(int N) {
     unordered_set<int> vis;
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq; 
+    priority_queue<array<int, 2>, vector<array<int, 2>>, greater<>> pq; 
     
     vis.insert(N);
     pq.push({0, N});  

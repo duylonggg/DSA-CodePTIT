@@ -12,7 +12,7 @@ int dy[] = {-2, -1, 1, 2, 2, -1, 1, -2};
 int BFS(int x, int y) {
     int vis[8][8] = {};
     vis[x][y] = 1;
-    queue<tuple<int, int, int>> q;
+    queue<array<int, 3>> q;
     q.push({x, y, 0});
 
     while (!q.empty()) {

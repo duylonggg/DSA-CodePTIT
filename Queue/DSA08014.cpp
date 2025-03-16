@@ -11,7 +11,7 @@ int16_t matrix[501][501];
 constexpr int16_t dx[] = {1, -1, 0, 0};
 constexpr int16_t dy[] = {0, 0, 1, -1};
 
-queue<pair<int16_t, int16_t>> q;
+queue<array<int16_t, 2>> q;
 
 inline void BFS() {
     int16_t res = 0;
