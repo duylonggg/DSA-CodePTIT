@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class DSA_P011 {
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void BFS(char[][] matrix, int n, int m, int start, int end) {
         int dx[] = {-1, 1, 0, 0};
         int dy[] = {0, 0, 1, -1};
