@@ -74,8 +74,7 @@ int main() {
 		for (int i = 0; i <= len; ++i) {
 			int r = dr[i], c = dc[i];
 			long long key = 1LL * (r + off) * 2000001LL + (c + off);
-			if (st.find(key) == st.end())
-			{
+			if (st.find(key) == st.end()) {
 				st.insert(key);
 				v.emplace_back(make_pair(r, c));
 			}
