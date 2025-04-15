@@ -11,10 +11,11 @@ int main() {
     int N, Q;
     cin >> N >> Q;
 
-    vector<int64_t> v(N + 1), prefix_sum(N + 1, 0);
+    int x;
+    vector<int64_t> prefix_sum(N + 1, 0);
     for (int i = 1; i <= N; ++i) {
-        cin >> v[i];
-        prefix_sum[i] = prefix_sum[i - 1] + (v[i] > 0 ? v[i] : 0);
+        cin >> x;
+        prefix_sum[i] = prefix_sum[i - 1] + 1LL * (x & ~(x >> 31));
     }
 
     while (Q--) {
