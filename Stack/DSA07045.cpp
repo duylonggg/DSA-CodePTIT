@@ -1,43 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define tests()     int test_cases; cin >> test_cases; while (test_cases--)
-#define fastio()    ios::sync_with_stdio(false); cin.tie(nullptr);
-#define endl        '\n'
-
 int main() {
-    fastio()
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
     string str;
     cin >> str;
 
-    deque<char> leftShift;
-    stack<char> rightShift;
+    list<char> l;
+    auto it = l.begin();  
+
     for (char c : str) {
-        if (isalnum(c)) {
-            leftShift.push_back(c);
-        } else if (c == '<') {
-            if (leftShift.empty()) continue;
-            rightShift.push(leftShift.back());
-            leftShift.pop_back();
-        } else if (c == '>') {
-            if (rightShift.empty()) continue;
-            leftShift.push_back(rightShift.top());
-            rightShift.pop();
-        } else if (c == '-') {
-            if (leftShift.empty()) continue;
-            leftShift.pop_back();
+        if (c == '<') {
+            if (it != l.begin()) --it;
+        }
+        else if (c == '>') {
+            if (it != l.end()) ++it;
+        }
+        else if (c == '-') {
+            if (it != l.begin()) l.erase(prev(it));
+        }
+        else {
+            l.insert(it, c);
         }
     }
 
-    while (!rightShift.empty()) {
-        leftShift.push_back(rightShift.top());
-        rightShift.pop();
-    }
-
-    while (!leftShift.empty()) {
-        cout << leftShift.front();
-        leftShift.pop_front();
+    for (char c : l) {
+        cout << c;
     }
     return 0;
 }
