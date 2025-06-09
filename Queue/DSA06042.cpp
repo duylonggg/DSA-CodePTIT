@@ -3,8 +3,7 @@ using namespace std;
 
 using ll = long long;
 
-int main()
-{
+int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
 
@@ -18,8 +17,7 @@ int main()
     sort(cows.begin(), cows.end());
 
     vector<ll> x(N), h(N);
-    for (int i = 0; i < N; ++i)
-    {
+    for (int i = 0; i < N; ++i) {
         x[i] = cows[i].first;
         h[i] = cows[i].second;
     }
@@ -27,10 +25,8 @@ int main()
     vector<bool> leftOK(N, 0), rightOK(N, 0);
     deque<int> dq;
     int l = 0;
-    for (int i = 0; i < N; ++i)
-    {
-        while (l < i && x[l] < x[i] - D)
-        {
+    for (int i = 0; i < N; ++i) {
+        while (l < i && x[l] < x[i] - D) {
             if (!dq.empty() && dq.front() == l)
                 dq.pop_front();
             ++l;
@@ -44,10 +40,8 @@ int main()
 
     dq.clear();
     int r = N - 1;
-    for (int i = N - 1; i >= 0; --i)
-    {
-        while (r > i && x[r] > x[i] + D)
-        {
+    for (int i = N - 1; i >= 0; --i) {
+        while (r > i && x[r] > x[i] + D) {
             if (!dq.empty() && dq.front() == r)
                 dq.pop_front();
             --r;

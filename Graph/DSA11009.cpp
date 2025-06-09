@@ -41,9 +41,6 @@ ll sumBT(Tree root)
     if (!root)
         return 0;
     return root->v;
-    ll ls = sumBT(root->l);
-    ll rs = sumBT(root->r);
-    return ls + rs;
 }
 
 bool check(Tree root)
